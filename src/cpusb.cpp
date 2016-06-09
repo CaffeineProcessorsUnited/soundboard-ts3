@@ -185,9 +185,9 @@ int ts3plugin_onTextMessageEvent(uint64 serverConnectionHandlerID, anyID targetM
 		int result = system(caller.str().c_str());
 		if (result != 0) {
 			// Couln't execute it :(
-			ts3Functions.logMessage("Error executing python script", LogLevel_ERROR,
+			ts3Functions.logMessage("Error executing python script", LogLevel_ERROR, "CPUSB", serverConnectionHandlerID);
 		} else {
-			ts3Functions.logMessage("Sent to server", LogLevel_ERROR,
+			ts3Functions.logMessage("Sent to server", LogLevel_ERROR, "CPUSB", serverConnectionHandlerID);
 		}
 		return 1; // Hide the message in the client
 	}
