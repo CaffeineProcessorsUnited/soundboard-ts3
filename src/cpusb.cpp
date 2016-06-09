@@ -182,6 +182,7 @@ int ts3plugin_onTextMessageEvent(uint64 serverConnectionHandlerID, anyID targetM
 		ts3Functions.logMessage(json.c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
 		std::stringstream caller;
 		caller << "python " << pluginPath << "cpusb_plugin/command.py \"" << pluginPath << "cpusb_plugin/\" \'" + json + "\'";
+		ts3Functions.logMessage(caller.str().c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
 		int result = system(caller.str().c_str());
 		if (result != 0) {
 			// Couln't execute it :(
