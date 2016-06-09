@@ -177,7 +177,7 @@ int ts3plugin_onTextMessageEvent(uint64 serverConnectionHandlerID, anyID targetM
 	}
 	if(fromID != myID && toID == myID) {  /* Don't reply when source is own client */
 		std::stringstream encoded;
-		encoded << "{client:{id:'" << fromID << "',unique:'" << fromUniqueIdentifier << "',name:'" << html_encode(fromName) << "'},data:'" << html_encode(message) << "'}";
+		encoded << "{\"client\":{\"id\":\"" << fromID << "\",\"unique\":\"" << fromUniqueIdentifier << "\",\"name\":\"" << html_encode(fromName) << "\"},\"data\":\"" << html_encode(message) << "\"}";
 		std::string json = encoded.str();
 		ts3Functions.logMessage(json.c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
 		std::stringstream caller;
