@@ -11,8 +11,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+//#include <string.h>
 #include <assert.h>
+
+#include <string>
+#include <iostream>
+#include <sstream>
 
 // not using cmake...
 //#include "CPUSBConfig.h"
@@ -23,8 +27,7 @@
 #include "teamspeak/public_rare_definitions.h"
 #include "teamspeak/clientlib_publicdefinitions.h"
 #include "ts3_functions.h"
-#include "soundboard.hpp"
-#include "jsoncpp.cpp"
+#include "cpusb.hpp"
 
 static struct TS3Functions ts3Functions;
 
@@ -176,12 +179,15 @@ int ts3plugin_onTextMessageEvent(uint64 serverConnectionHandlerID, anyID targetM
 		std::stringstream encoded;
 		encoded << "{client:{id:'" << fromID << "',unique:'" << fromUniqueIdentifier << "',name:'" << html_encode(fromName) << "'},data:'" << html_encode(message) << "'}";
 		std::string json = encoded.str();
-        ts3Functions.logMessage(json.c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
+		ts3Functions.logMessage(json.c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
 		std::stringstream caller;
-        caller << "python " << pluginPath << "cpusb_plugin/command.py \"" << pluginPath << "cpusb_plugin/\" \"" + json + "\"";
+		caller << "python " << pluginPath << "cpusb_plugin/command.py \"" << pluginPath << "cpusb_plugin/\" \"" + json + "\"";
 		int result = system(caller.str().c_str());
 		if (result != 0) {
 			// Couln't execute it :(
+			ts3Functions.logMessage("Error executing python script", LogLevel_ERROR,
+		} else {
+			ts3Functions.logMessage("Sent to server", LogLevel_ERROR,
 		}
 		return 1; // Hide the message in the client
 	}

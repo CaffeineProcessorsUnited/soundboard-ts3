@@ -31,7 +31,7 @@ cpusb%.o:
 
 clean:
 	@echo "Cleaning up..."
-	@rm -fr build/* dist/*
+	@rm -fr build/* dist/*.{so,dll}
 
 # Obviously only for testing reasons
 dist:
