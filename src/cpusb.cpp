@@ -175,7 +175,7 @@ int ts3plugin_onTextMessageEvent(uint64 serverConnectionHandlerID, anyID targetM
         ts3Functions.logMessage("Error querying own client id", LogLevel_ERROR, "CPUSB", serverConnectionHandlerID);
 		return 0;
 	}
-	if(fromID != myID) {  /* Don't reply when source is own client */
+	if(fromID != myID && toID == myID) {  /* Don't reply when source is own client */
 		std::stringstream encoded;
 		encoded << "{client:{id:'" << fromID << "',unique:'" << fromUniqueIdentifier << "',name:'" << html_encode(fromName) << "'},data:'" << html_encode(message) << "'}";
 		std::string json = encoded.str();
