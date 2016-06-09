@@ -1,10 +1,16 @@
 from sys import argv
+import requests
 
 script, path, command = argv
 
-print(path + "commands.log")
-target = open(path + "commands.log", 'a')
+proto = "http"
+host = "soundboard.lan"
+port = 3000
 
-target.write(command + "\n")
+if (False):
+	print(path + "commands.log")
+	target = open(path + "commands.log", 'a')
+	target.write(command + "\n")
+	target.close()
 
-target.close()
+r = requests.post(proto + "://" + host + ":" + str(port), data={'json': command})
