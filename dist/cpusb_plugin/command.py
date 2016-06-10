@@ -15,7 +15,11 @@ if (False):
 
 def decode(data):
 	#print(data)
-	return data.replace("%22", "\\\"").replace("%27", "\\\'")
+	data = data.replace("%22", "\\\"")
+	data = data.replace("%27", "\\\'")
+	data = data.replace("[URL]", "")
+	data = data.replace("[/URL]", "")
+	return data
 
 id = decode(id)
 unique = decode(unique)
