@@ -22,4 +22,4 @@ name = decode(name)
 command = decode(command);
 
 payload = { 'client': { 'id': id, 'unique': unique, 'name': name }, 'data': command }
-r = requests.post(proto + "://" + host + ":" + str(port), data={'json': command})
+r = requests.post(proto + "://" + host + ":" + str(port), data=payload)
