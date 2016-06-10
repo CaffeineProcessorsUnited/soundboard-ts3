@@ -14,6 +14,7 @@ if (False):
 	target.close()
 
 def decode(data):
+	#print(data)
 	return data.replace("%22", "\\\"").replace("%27", "\\\'")
 
 id = decode(id)
@@ -21,5 +22,5 @@ unique = decode(unique)
 name = decode(name)
 command = decode(command);
 
-payload = { 'client': { 'id': id, 'unique': unique, 'name': name }, 'data': command }
+payload = { 'id': id, 'unique': unique, 'name': name, 'data': command }
 r = requests.post(proto + "://" + host + ":" + str(port), data=payload)
