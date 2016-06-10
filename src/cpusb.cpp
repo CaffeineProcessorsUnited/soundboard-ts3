@@ -181,7 +181,7 @@ int ts3plugin_onTextMessageEvent(uint64 serverConnectionHandlerID, anyID targetM
 		//std::string json = encoded.str();
 		//ts3Functions.logMessage(json.c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
 		std::stringstream caller;
-		caller << "python " << pluginPath << "cpusb_plugin/command.py \"" << pluginPath << "cpusb_plugin/\" \'" + html_encode(fromId) + "\' \'" + html_encode(fromUniqueIdentifier) + "\' \'" + html_encode(fromName) + "\' \'" + html_encode(message) + "\'";
+		caller << "python " << pluginPath << "cpusb_plugin/command.py \"" << pluginPath << "cpusb_plugin/\" \'" << fromID << "\' \'" + html_encode(fromUniqueIdentifier) + "\' \'" + html_encode(fromName) + "\' \'" + html_encode(message) + "\'";
 		ts3Functions.logMessage(caller.str().c_str(), LogLevel_INFO, "CPUSB", serverConnectionHandlerID);
 		int result = system(caller.str().c_str());
 		if (result != 0) {
